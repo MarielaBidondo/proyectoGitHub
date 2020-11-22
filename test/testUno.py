@@ -1,9 +1,14 @@
-import requests
+#importar libreria Beautiful soup para trabajar con html
 from bs4 import BeautifulSoup
+#paquete request
+import requests
 import re
 import time
 import io
 import pytesseract
+
+
+#variable url donde esta el producto a evaluar
 
 URL = 'https://www.amazon.es/Nuevo-Apple-iPhone-12-128-GB/dp/B08L5SVNZB/' \
       'ref=sr_1_1_sspa?__mk_es_ES=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2G4CC972YL84I&dchild' \
@@ -13,39 +18,68 @@ URL = 'https://www.amazon.es/Nuevo-Apple-iPhone-12-128-GB/dp/B08L5SVNZB/' \
       'TBXRlYwJmVuY3J5cHRlZEFkSWQ9QTA0NjgyNDkxNVBJTjhJT1VOWTkxJndpZGdldE5hbWU9c3BfYXRmJmF' \
       'jdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ=='
 
+#URL=' https://www.amazon.fr/dp/B084DWG2VQ/ref=s9_acss_bw_pg_WFpfn19f_1_t?pf_rd_m=A1X6FK5RDHNB96&pf_rd_s=merchandised-search-1&pf_rd_r=YMX058ER8MC634ND0P2Z&pf_rd_t=101&pf_rd_p=8a42b39e-007c-4951-a9e4-b74c249d44d7&pf_rd_i=15601482031'
+URL = 'https://www.ebay.es/itm/Apple-iPhone-12-5G-64GB-NUOVO-Originale-Smartphone-iOS-14-Black/133571359505?hash=item1f19793311:g:6AEAAOSwsgtfmasC'
+
+#Error     titulo = soup.find(id = 'productTitle' ).get_text()
+#AttributeError: 'NoneType' object has no attribute 'get_text'
+#Esto significa que no esta devolviendo las etiquetas que buscamos, puede ser por estructura de la pagina o que Amazon ha bloqueado request
+#Informacion de error y posibles soluciones, las he probado todas sin resultado :(
+#https://stackoverflow.com/questions/60139616/attributeerror-nonetype-object-has-no-attribute-get-text-python-web-scrapin
+#https://blog.datahut.co/challenges-that-make-amazon-data-scraping-so-painful/
+#Para probar el programa he usado otra pagina de ejemplo
+
+#Tipo de explorador en el que vamos a abrir la url mencionada
+#headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
+#          '(KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36'}
+#my user agent es un poco diferente:
 headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-           '(KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36'}
+                         '(KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'}
 
 
-'''Función que comprueba el precio de un producto'''
+#Función que comprueba el precio de un producto
 def comprobar_precio():
-      page = requests.get(URL, headers=headers)
-
+      #Requerimos la pagina con url y header previamanete definido
+      page = requests.get(URL, headers = headers)
+      #Con el paquete de Beautiful soup usamos el metodo content donde podemos acceder a el contenido de nuestra pagina
+      # contenido pareseado a  html lo guardaos en la variable soup
       soup = BeautifulSoup(page.content, 'html.parser')
+      #Usamos metodo find pasandole como parametro el identificador o etiqueta donde esta el titulo, precio y precio de envio  de el producto
+      #Amazon example
+      #titulo = soup.find(id='titleItem').get_text().strip()
+      #precio = soup.find(id='priceblock_ourprice').get_text().strip()
+      # precio = soup.find(id="price-shipping-message").get_text().strip()
+      #eBay example
+      #Metodo get_Text() nos quita las etiquetas html y con metodo strip() removemo sespacios en blanco
+      titulo = soup.find(id = 'itemTitle' ).get_text().strip()
+      precio = soup.find(id ='prcIsum').get_text().strip()
+      precio2 = soup.find(id="fshippingCost").get_text().strip()
+      #precio = float(precio[:-5])
 
-      titulo = soup.find(id='productTitle').get_text().strip()
-      precio = soup.find(id='priceblock_ourprice').get_text().strip()
-      precio = float(precio[:-5])
+  #    if precio < 900:
+ #           enviar_email()
+#
+  #    enlaces = soup.find_all('a')
 
-      if precio < 900:
-            enviar_email()
+  #    lista = []
+ #     lista_final = []
 
-      enlaces = soup.find_all('a')
+   #   print(titulo + "  " + "\n", precio)
+  #    for link in soup.find_all('a'):
+#           lista.append(str(link.get('href')))
+#
+ #     for elemento in lista:
+ #           if re.findall('^/dp', elemento):
+ #                 lista_final.append('https://amazon.es/'+ elemento)
 
-      lista = []
-      lista_final = []
-
-      print(titulo + "  " + "\n", precio)
-      for link in soup.find_all('a'):
-           lista.append(str(link.get('href')))
-
-      for elemento in lista:
-            if re.findall('^/dp', elemento):
-                  lista_final.append('https://amazon.es/'+ elemento)
-
-      print(lista_final)
+ #     print(lista_final)
 
 
-while True:
-      comprobar_precio()
-      time.sleep(10)
+#while True:
+ #     comprobar_precio()
+ #     time.sleep(10)
+
+print(page)
+
+print(soup)
+print(titulo)
