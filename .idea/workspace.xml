@@ -8,8 +8,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40a04551-1e68-480a-a263-62bcc57a9bc4" name="Default Changelist" comment="ebay">
-      <change afterPath="$PROJECT_DIR$/test/enviar_email.py" afterDir="false" />
+    <list default="true" id="40a04551-1e68-480a-a263-62bcc57a9bc4" name="Default Changelist" comment="ad 1 y 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/testUno.py" beforeDir="false" afterPath="$PROJECT_DIR$/test/testUno.py" afterDir="false" />
     </list>
@@ -26,6 +25,12 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jvUSjLPkWWU7tGgdVREz4bq7PY" />
@@ -94,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606067124869</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ad 1 y 2">
+      <created>1606084546435</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606084546435</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +166,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fromcharm" />
     <MESSAGE value="ebay" />
-    <option name="LAST_COMMIT_MESSAGE" value="ebay" />
+    <MESSAGE value="ad 1 y 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="ad 1 y 2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="409" y="0" key="#Inspections" timestamp="1605825583188">
@@ -219,10 +232,11 @@
       <screen x="1366" y="-304" width="1920" height="1040" />
     </state>
     <state x="1802" y="-126" key="SettingsEditor/0.0.1366.728/1366.-304.1920.1040@1366.-304.1920.1040" timestamp="1606037565186" />
-    <state x="1893" y="-51" key="Vcs.Push.Dialog.v2" timestamp="1606072284247">
-      <screen x="1366" y="-304" width="1920" height="1040" />
+    <state x="375" y="177" key="Vcs.Push.Dialog.v2" timestamp="1606121312610">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="1893" y="-51" key="Vcs.Push.Dialog.v2/0.0.1366.728/1366.-304.1920.1040@1366.-304.1920.1040" timestamp="1606072284247" />
+    <state x="1893" y="-51" key="Vcs.Push.Dialog.v2/0.0.1366.728/1366.-304.1920.1040@1366.-304.1920.1040" timestamp="1606094973707" />
+    <state x="375" y="177" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1606121312610" />
     <state x="1761" y="-57" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1" timestamp="1606059373552">
       <screen x="1366" y="-304" width="1920" height="1040" />
     </state>

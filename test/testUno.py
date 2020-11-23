@@ -6,6 +6,7 @@ import time
 # paquete request
 import requests
 from bs4 import BeautifulSoup
+fullpath ='srcfile'
 
 # variable url donde esta el producto a evaluar
 
@@ -153,7 +154,8 @@ def requestUrl(urlLista):
             ListaDeSOAP.append(soap)
             #print(soap)
          #En caso que el status no es ok, devolvemos el staus como resutado
-        else: ListaDeSOAP.append(status_code)
+        else:
+            ListaDeSOAP.append(status_code)
     # Devolemos la lista de equipos sin repetir valores
     return ListaDeSOAP
 
@@ -162,9 +164,73 @@ url2 = "http://www.jose.com/"
 url3 = "https://www.leboncoin.fr/"
 # Realizamos la petición a la web
 
-urlLista = [url1,url2,url3]
+#urlLista = [url1,url2,url3]
 
-print(requestUrl(urlLista))
+#print(requestUrl(urlLista))
+
+#3º. Crear la función encontrar_urls() que recibirá como parámetro un objeto soap
+# (uno objeto con el html ya parseado) y devuelva todas las urls del producto
+
+def encontrar_urls(urlSoap):
+    #Recorremos todos los links en el ojeto
+    for link in urlSoap.find_all('a', href=True):
+     #Encontramos los elementos "a" y si hacen referencia a url los imprimimos
+    #Verificamos que links sean urls
+        if 'https:' in link['href']:
+            #Imprimimos los links que son urls
+            print(link['href'])
+
+
+#print(encontrar_urls(soup2))
+
+# 4º Crear una función que encuentre todas las imágenes src="" del html y
+# almacene en un fichero dichos enlaces. Deberá devolver el nombre del fichero si ha encontrado
+# las url y las ha escrito en el fichero. Si se vuelve a llamar a la función, para ese mismo producto deberá sobreescribir la información.
+
+def encontrar_src(url):
+    # Requerimos la pagina con url y header previamanete definido
+    page = requests.get(url, headers=headers)
+    # Con el paquete de Beautiful soup usamos el metodo content donde podemos acceder a el contenido de nuestra pagina
+    # contenido pareseado des html lo guardaos en la variable soup
+    soup = BeautifulSoup(page.content, 'html.parser')
+    # Usamos metodo find pasandole como parametro el identificador o etiqueta encontramos imagenes
+    images = soup.find_all('img')
+    # Recorremos todos los links con imagenes
+    for image in images:
+        src = (image['src'])
+        i = 1
+        # Si el fichero no existe lo creamos
+        with open(fullpath, 'a') as file:
+            # agregamos los links a nuestro fichero
+            file.write(src + "\n")
+
+            # Para que se sobreescriba necesitamos usar w , pero primero debemos de verificar
+            # que sea la segunda vez que pasamos el mismo producto
+            # try:
+            #
+            # with open(fullpath, 'r') as file:
+            #  x = file.read().replace("\n", " ")
+            #  print(x)
+            #  print(src)
+            # if (x == src and i==1):
+
+            #    with open(fullpath, 'w') as file:
+            #     file.write(src+"\n")
+            #     i=2
+            # Si el fichero no existe lo creamos
+            # else:
+
+            # agregamos los links a nuestro fichero
+            file.write(src + "\n")
+        # Si hemos escrito el fichero devolveremos el nombre de el archivo
+
+    return file
+
+
+# Imprimimos los links que son urls
+#     print(image['src'])
+print(encontrar_src(URL2))
+
 
 while True:
     # Llamamos a nuestra funcion
